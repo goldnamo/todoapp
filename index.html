@@ -13,7 +13,8 @@
         <button v-on:click="fetchItem">add</button>
         <div>
             <ul>
-                <li v-for ="todoItem in todoItems">{{todoItem}}</li>
+                <li v-for ="(todoItem,index) in todoItems">{{todoItem}} <button v-on:click="removeItem(todoItem,index)">remove</button></li>
+                
             </ul>
         </div>
     </div>
@@ -34,6 +35,7 @@
                    let value = this.inputText;
                    localStorage.setItem(value,value);
                    this.inputText = '';
+                   this.todoItems.push(value);
                 },
                 fetchItem: function() {
                      for (let i=0;i <localStorage.length;i++) {
@@ -43,7 +45,9 @@
                      }
                 },
                 removeItem(todoItem, index) {
-
+                    console.log(todoItem,index);
+                    this.todoItems.splice(index,1);
+                    localStorage.removeItem(todoItem);
                 }
                 
 

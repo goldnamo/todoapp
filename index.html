@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Todo</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Todo App</h1>
+        <input type="text" v-model="inputText" v-on:keyup.enter="addItem">
+        <button v-on:click="addItem">add</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            created: function() {
+                this.fetchItem();
+            },
+            el: '#app',
+            data:{
+                inputText: '',
+                todoItems: []
+            },
+            methods:{
+                addItem: function(event) {
+                   console.log(event); 
+                   let value = this.inputText;
+                   localStorage.setItem(value,value);
+                   this.inputText = '';
+                },
+                fetchItem: function() {
+                     for (let i=0;i <localStorage.length;i++) {
+                         let value = localStorage.key(i);
+                         console.log(value);
+                         this.todoItems.push(value);
+                     }
+                },
+                removeItem(todoItem, index) {
+
+                }
+                
+
+            }
+        })
+    </script>
+</body>
+</html>
